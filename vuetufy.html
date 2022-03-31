@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    
+</head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-app-bar app color="primary" dark>
+                <v-app-bar-nav-icon @click="ndrawer = true">
+                </v-app-bar-nav-icon>
+                <v-toolbar-title>부산관광안내</v-toolbar-title>
+            </v-app-bar>
+
+            <v-navigation-drawer absolute temporary v-model="ndrawer">
+                <v-toolbar flat height="70px">
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-avatar>
+                               <v-icon>mdi-account-circle</v-icon>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title> 즐거운 부산 </v-list-item-title>
+                                <v-list-item-subtitle> 다이나믹 부산 </v-list-item-subtitle>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list>
+                </v-toolbar>
+                <v-divider></v-divider>
+
+                <!-- 메뉴리스트 -->
+                <v-list>
+                    <v-list-item @click="" v-for="item in itemList">
+                        <v-list-item-action >
+                            <v-icon class="">{{item.icon}}</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                {{item.title}}
+                            </v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+
+                    
+                </v-list>
+
+            </v-navigation-drawer>
+            <v-content>
+                <v-container>
+                    <v-col  align="center">
+                        <h2>현재 인기있는 곳입니다</h2>
+                        <p>추천을 통해있는 곳을 골라주세요</p>
+                    </v-col>
+                    <v-row>
+                        <v-col  sm="6" cols="12" md="6">
+                            <!-- 카드UI 사용을 위한 v-card-->
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/199/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <h3>해운대</h3> 
+                                    <br>
+                                    {{num1}}
+                                    
+                                    <v-btn class="justify-end" align-end   @click="btn1" dark color="green darken-1">추천</v-btn>
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                        <v-col  sm="6" cols="12" md="6">
+                            
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/249/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <h3>바다 도시 야경</h3> 
+                                    
+                                    <br>
+                                    {{num2}}
+                                    <v-btn  @click="btn2" dark color="green darken-1">추천</v-btn>
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                        <v-col  sm="6" cols="12" md="6">
+                           
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/392/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <h3>광안대교</h3> 
+                                    <br>
+                                    {{num3}} 
+                                    <v-btn @click="btn3" dark color="green darken-1">추천</v-btn>
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+
+                            
+                       <v-col  sm="6" cols="12" md="6">
+                         
+                            <v-card>
+                                <v-img src="https://picsum.photos/id/742/400/300" aspect-ratio="2.3"></v-img>
+                                <v-card-text>
+                                    <h3>해운대 인어동상</h3> 
+                                <br>
+                                    {{num4}}
+                                    <v-btn @click="btn4"  dark color="green darken-1">추천</v-btn>
+
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                    
+                <v-list> 
+                    {{recommend}}
+                        <v-slide-x-transition group>
+                            <!-- 반드시 key값을 작성해야 트랜지션 적용 -->
+                                <v-list-item v-for="n in recommends" :key="n">
+                                    <v-list-item-content>
+                                        <v-list-item-title>{{n.recommend}} </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                        </v-slide-x-transition>
+                    </v-list> 
+                </v-container>
+            </v-content>
+
+          
+        </v-app>
+    </div>
+
+        </v-app>
+    </div>
+
+    <script>
+        new Vue({
+            el : '#app',
+            vuetify : new Vuetify(),
+            data : {
+                ndrawer : false,
+                itemList : [
+                    {
+                        title : '메인페이지',
+                        icon : 'mdi-keyboard-outline'
+                       
+                    },
+                    {
+                        title : '관광지소개',
+                        icon : 'mdi-clipboard-edit-outline'},
+                        
+                    {
+                        title : '추천명소',
+                        icon : 'mdi-check-bold'
+                        
+                    }
+                ],
+                num1:0,
+                num2:0,
+                num3:0,
+                num4:0,
+               
+                recommends : [],
+            
+            },
+            methods : {
+                btn1: function () {
+                    this.num1++,
+                    this.recommends.push({recommend :"해운대를 추천합니다"})
+
+
+                },
+                btn2: function () {
+                    this.num2++,
+                    this.recommends.push({recommend :"바다도시야경을추천합니다"})
+
+
+                },
+                btn3: function () {
+                    this.num3++,
+                    this.recommends.push({recommend :"광안대교를추천합니다"})
+
+
+                },
+
+
+                btn4: function () {
+                    this.num4++,
+                    this.recommends.push({recommend :"해운대인어동상을추천합니다"})
+
+
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
